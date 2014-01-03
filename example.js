@@ -19,7 +19,8 @@ var urls = [
 
 function *status(url) {
   console.log('GET %s', url);
-  return (yield request(url)).statusCode;
+  var s = (yield request(url)).statusCode;
+  return [url, s];
 }
 
 co(function *(){
