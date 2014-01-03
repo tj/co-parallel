@@ -1,0 +1,20 @@
+{
+  "name": "co-parallel",
+  "version": "0.0.1",
+  "repository": "visionmedia/co-parallel",
+  "description": "parallel execution with concurrency control",
+  "keywords": [
+    "co",
+    "generators",
+    "parallel",
+    "concurrent"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "co": "~3.0.2",
+    "co-request": "~0.1.1"
+  },
+  "license": "MIT"
+}
