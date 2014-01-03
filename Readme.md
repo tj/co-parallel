@@ -12,9 +12,9 @@ $ npm install co-parallel
 ## Example
 
 ```js
+var parallel = require('co-parallel');
 var request = require('co-request');
 var co = require('co');
-var parallel = require('./');
 
 var urls = [
   'http://google.com',
