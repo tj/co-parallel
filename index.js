@@ -1,8 +1,13 @@
 
-module.exports = function *parallel(thunks, n){
-  var ret = [];
-  n = Math.min(n || 5, thunks.length);
+/**
+ * Module dependencies.
+ */
 
+var thread = require('co-thread');
+
+module.exports = function *parallel(thunks, n){
+  var n = Math.min(n || 5, thunks.length);
+  var ret = [];
   var index = 0;
 
   function *next() {
@@ -12,11 +17,7 @@ module.exports = function *parallel(thunks, n){
     index < thunks.length && (yield next);
   }
 
-  var nexts = [];
-  while (n--) {
-    nexts.push(next);
-  }
-  yield nexts;
+  yield thread(next, n);
 
   return ret;
 };

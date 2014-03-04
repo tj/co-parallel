@@ -9,7 +9,9 @@
     "parallel",
     "concurrent"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "co-thread": "0.0.1"
+  },
   "devDependencies": {
     "mocha": "*",
     "should": "*",
