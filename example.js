@@ -24,7 +24,9 @@ function *status(url) {
 }
 
 co(function *(){
+  var start = Date.now();
   var reqs = urls.map(status);
   var res = yield parallel(reqs, 2);
   console.log(res);
+  console.log('total used %dms', Date.now() - start);
 })();
