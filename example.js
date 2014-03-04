@@ -14,6 +14,8 @@ var urls = [
   'http://cloudup.com',
   'http://myspace.com',
   'http://facebook.com',
+  'http://cuteoverload.com',
+  'http://uglyoverload.com',
   'http://segment.io'
 ];
 
@@ -26,7 +28,7 @@ function *status(url) {
 co(function *(){
   var start = Date.now();
   var reqs = urls.map(status);
-  var res = yield parallel(reqs, 2);
+  var res = yield parallel(reqs, 3);
   console.log(res);
-  console.log('total used %dms', Date.now() - start);
+  console.log('duration: %dms', Date.now() - start);
 })();
