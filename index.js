@@ -1,13 +1,22 @@
 
 module.exports = function *parallel(thunks, n){
   var ret = [];
-  n = n || 5;
+  n = Math.min(n || 5, thunks.length);
 
-  while (thunks.length) {
-    var res = yield thunks.slice(0, n);
-    ret = ret.concat(res);
-    thunks = thunks.slice(n);
+  var index = 0;
+
+  function *next() {
+    var i = index;
+    index++;
+    ret[i] = yield thunks[i];
+    index < thunks.length && (yield next);
   }
+
+  var nexts = [];
+  while (n--) {
+    nexts.push(next);
+  }
+  yield nexts;
 
   return ret;
 };
