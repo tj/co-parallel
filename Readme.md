@@ -16,15 +16,15 @@ var parallel = require('co-parallel');
 var request = require('co-request');
 var co = require('co');
 
-var urls = [
-  'http://google.com',
-  'http://yahoo.com',
-  'http://ign.com',
-  'http://cloudup.com',
-  'http://myspace.com',
-  'http://facebook.com',
-  'http://segment.io'
-];
+var urls = {
+  google   : 'http://google.com',
+  yahoo    : 'http://yahoo.com',
+  ign      : 'http://ign.com',
+  cloudup  : 'http://cloudup.com',
+  myspace  : 'http://myspace.com',
+  facebook : 'http://facebook.com',
+  segment  : 'http://segment.io'
+};
 
 function *status(url) {
   console.log('GET %s', url);
@@ -32,7 +32,8 @@ function *status(url) {
 }
 
 co(function *(){
-  var reqs = urls.map(status);
+  var reqs = {}
+  for (var key in urls) reqs[key] = status(urls[key]);
   var res = yield parallel(reqs, 2);
   console.log(res);
 })();
@@ -42,8 +43,7 @@ co(function *(){
 
 ### parallel(thunks, [concurrency])
 
-  Execute `thunks` in parallel, with the given
-  `concurrency` defaulting to 5.
+  Execute `thunks` in parallel with the given `concurrency`, defaulting to 5.
 
 # License
 
