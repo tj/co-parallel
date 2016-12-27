@@ -11,9 +11,10 @@ module.exports = function *parallel(thunks, n){
   var index = 0;
 
   function *next() {
-    var i = index++;
-    ret[i] = yield thunks[i];
-    if (index < thunks.length) yield next;
+    while(index < thunks.length) {
+      var i = index++;
+      ret[i] = yield thunks[i];
+    }
   }
 
   yield thread(next, n);
